@@ -1,6 +1,7 @@
 body {
-  background-color: #f7f7f7;
+  background-color: black;
   font-family: "Arial", sans-serif;
+  color: white;
   text-align: center;
 }
 
@@ -11,7 +12,7 @@ body {
 }
 
 #startgame {
-  background-color: #37b4e4;
+  background-color: red;
   color: #ffffff;
   font-size: 24px;
   font-weight: bold;
@@ -62,8 +63,9 @@ body {
   font-size: 28px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 2px solid #37b4e4;
+  border: 2px solid red;
   border-radius: 5px;
+  color: black;
 }
 
 #instruction {
@@ -79,7 +81,7 @@ body {
 }
 
 .box {
-  background-color: #37b4e4;
+  background-color: red;
   color: #ffffff;
   font-size: 20px;
   font-weight: bold;
