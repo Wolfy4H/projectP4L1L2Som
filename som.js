@@ -13,7 +13,7 @@ document.getElementById("startgame").onclick = function () {
 
     document.getElementById("scorevalue").innerHTML = score;
     show("timeremaining");
-    timeremaining = 60;
+    timeremaining = 10;
 
     document.getElementById("timeremainingvalue").innerHTML = timeremaining;
 
@@ -25,7 +25,7 @@ document.getElementById("startgame").onclick = function () {
 
     startCountdown();
 
-    genretaQuestion();
+    generateQuestion();
   }
 };
 
@@ -41,7 +41,10 @@ for (let i = 1; i < 5; i++) {
           hide("correct");
         }, 1000);
 
-        genretaQuestion();
+        timeremaining += 2;
+        document.getElementById("timeremainingvalue").innerHTML = timeremaining;
+
+        generateQuestion();
       } else {
         score--;
         document.getElementById("scorevalue").innerHTML = score;
@@ -50,8 +53,24 @@ for (let i = 1; i < 5; i++) {
         setTimeout(function () {
           hide("wrong");
         }, 1000);
+
+        timeremaining -= 3;
+        if (timeremaining <= 0) {
+          stopCountdown();
+          show("gameover");
+
+          // Game over
+          document.getElementById("gameover").innerHTML =
+            "<p>Game over!</p><p>Your score is " + score + ".</p>";
+          hide("timeremaining");
+          hide("correct");
+          hide("wrong");
+          playing = false;
+
+          document.getElementById("startgame").innerHTML = "Start Game";
+        }
+        document.getElementById("timeremainingvalue").innerHTML = timeremaining;
       }
-      generateQA();
     }
   };
 }
@@ -61,11 +80,11 @@ function startCountdown() {
     timeremaining -= 1;
 
     document.getElementById("timeremainingvalue").innerHTML = timeremaining;
-    if (timeremaining == 0) {
+    if (timeremaining <= 0) {
       stopCountdown();
       show("gameover");
 
-      //game over
+      // Game over
       document.getElementById("gameover").innerHTML =
         "<p>Game over!</p><p>Your score is " + score + ".</p>";
       hide("timeremaining");
@@ -90,7 +109,7 @@ function show(Id) {
   document.getElementById(Id).style.display = "block";
 }
 
-function genretaQuestion() {
+function generateQuestion() {
   let x = 1 + Math.round(9 * Math.random());
   let y = 1 + Math.round(9 * Math.random());
   correctAnswer = x * y;
@@ -98,7 +117,7 @@ function genretaQuestion() {
   document.getElementById("question").innerHTML = x + "x" + y;
   let correctPosition = 1 + Math.round(3 * Math.random());
 
-  document.getElementById("box" + correctPosition).innerHTML = correctAnswer; //correct answer
+  document.getElementById("box" + correctPosition).innerHTML = correctAnswer; // Correct answer
 
   let answers = [correctAnswer];
 
